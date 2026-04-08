@@ -31,6 +31,7 @@ void PatchSet::processKext(KernelPatcher& patcher, size_t index, mach_vm_address
         if (!strcmp(kextList[i].id, kextList[0].id)) {
             Patches::unblockLegacyThunderbolt(patcher, &kextList[i]);
             Patches::bypassPCITunnelled(patcher, &kextList[i]);
+            Patches::applySequoiaPatch(patcher, &kextList[i]);
         }
         
         if (!strcmp(kextList[i].id, kextList[1].id)) {
@@ -52,4 +53,3 @@ void PatchSet::processKext(KernelPatcher& patcher, size_t index, mach_vm_address
     
     patcher.clearError();
 }
-

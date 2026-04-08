@@ -20,16 +20,22 @@ private:
     constexpr static const char* nvda = "NVDA";
     
     constexpr static const char* tbtVersionArg = "krytbtv";
-    
+    constexpr static const char* sequoiaForceArg = "kryfsequoia";
+
+    static bool sequoiaForce;
+
     static void getGPU();
     static void getTBTVersion();
+    static void getSequoiaForce();
 
 public:
     static void init();
     static bool isAMD();
     static bool isNVDA();
+    static bool shouldForceSequoia();
     static bool isThunderbolt1();
     static bool isThunderbolt2();
+    static bool skipThunderboltEnum();
 };
 
 #endif /* kern_nvramargs_hpp */

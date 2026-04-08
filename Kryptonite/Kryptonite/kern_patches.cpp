@@ -34,6 +34,10 @@ void Patches::unblockLegacyThunderbolt(KernelPatcher &patcher, KernelPatcher::Ke
         const uint8_t find[] = {0x49, 0x4f, 0x54, 0x68, 0x75, 0x6e, 0x64, 0x65, 0x72, 0x62, 0x6f, 0x6c, 0x74, 0x53, 0x77, 0x69, 0x74, 0x63, 0x68, 0x54, 0x79, 0x70, 0x65, 0x33};
         const uint8_t repl[] = {0x49, 0x4f, 0x54, 0x68, 0x75, 0x6e, 0x64, 0x65, 0x72, 0x62, 0x6f, 0x6c, 0x74, 0x53, 0x77, 0x69, 0x74, 0x63, 0x68, 0x54, 0x79, 0x70, 0x65, tbType};
         patch = {kext, find, repl, sizeof(find), 1};
+    } else if (getKernelVersion() == KernelVersion::Sequoia) {
+        const uint8_t find[] = {0xf8, 0x03, 0x72, 0x0a};
+        const uint8_t repl[] = {0xf8, 0x00, 0x72, 0x0a};
+        patch = {kext, find, repl, sizeof(find), 1};
     } else {
         const uint8_t find[] = {0xf8, 0x03, 0x0f, 0x82, 0x78, 0xff, 0xff, 0xff, 0x49, 0x8b, 0x06, 0xc6, 0x80, 0x78, 0x01, 0x00};
         const uint8_t repl[] = {0xf8, 0x00, 0x0f, 0x82, 0x78, 0xff, 0xff, 0xff, 0x49, 0x8b, 0x06, 0xc6, 0x80, 0x78, 0x01, 0x00};
@@ -63,7 +67,12 @@ void Patches::bypassIOPCITunnelCompatible(KernelPatcher &patcher, KernelPatcher:
             patch = {kext, find, repl, sizeof(find), 1};
             break;
         }
-            
+        case KernelVersion::Sequoia: {
+            const uint8_t find[] = {0xff, 0x90, 0xa8, 0x02, 0x00, 0x00, 0x48, 0x85, 0xc0, 0x0f, 0x84, 0xd1, 0x00, 0x00, 0x00};
+            const uint8_t repl[] = {0xff, 0x90, 0xa8, 0x02, 0x00, 0x00, 0x48, 0x85, 0xc0, 0x48, 0xe9, 0xd1, 0x00, 0x00, 0x00};
+            patch = {kext, find, repl, sizeof(find), 1};
+            break;
+        }
         default: {
             const uint8_t find[] = {0xff, 0x90, 0xa8, 0x02, 0x00, 0x00, 0x48, 0x85, 0xc0, 0x0f, 0x84, 0xb9, 0x00, 0x00, 0x00};
             const uint8_t repl[] = {0xff, 0x90, 0xa8, 0x02, 0x00, 0x00, 0x48, 0x85, 0xc0, 0x48, 0xe9, 0xb9, 0x00, 0x00, 0x00};
@@ -88,7 +97,27 @@ void Patches::updateMuxControlNVRAMVar(KernelPatcher &patcher, KernelPatcher::Ke
 }
 
 void Patches::routeThunderboltEnumeration(KernelPatcher &patcher, size_t *index, mach_vm_address_t *address, size_t *size) {
+    if (!NVRAMArgs::skipThunderboltEnum()) {
+        SYSLOG("Kryptonite", "Skipping Thunderbolt enumeration patch because skipthunderboltenum is not set.");
+        return;
+    }
+
     mach_vm_address_t orgSkipEnumerationCallback {0};
     KernelPatcher::RouteRequest request("__ZN24IOThunderboltSwitchType321shouldSkipEnumerationEv", FunctionHooks::thunderboltShouldSkipEnumeration, {orgSkipEnumerationCallback});
     patchApplicator.applyRoutingPatch(*index, patcher, &request, *address, *size);
+}
+
+void Patches::applySequoiaPatch(KernelPatcher &patcher, KernelPatcher::KextInfo *kext) {
+    if (!Compatibility::isSequoiaForced()) {
+        SYSLOG("Kryptonite", "Skipping Sequoia patch because kryfsequoia is not set.");
+        return;
+    }
+
+    // Example patch for Sequoia. Replace this with actual bytes to patch if needed.
+    const uint8_t find[] = {0x08, 0x00, 0x00, 0x00, 0x48, 0x04, 0x00, 0x00};
+    const uint8_t repl[] = {0x09, 0x00, 0x00, 0x00, 0x30, 0x05, 0x00, 0x00};
+
+    KernelPatcher::LookupPatch patch = {kext, find, repl, sizeof(find), 1};
+    SYSLOG("Kryptonite", "Applying Sequoia-specific patch...");
+    patchApplicator.applyLookupPatch(patcher, &patch);
 }

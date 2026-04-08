@@ -21,6 +21,7 @@ public:
     static void bypassIOPCITunnelCompatible(KernelPatcher &patcher, KernelPatcher::KextInfo *kext);
     static void updateMuxControlNVRAMVar(KernelPatcher &patcher, KernelPatcher::KextInfo *kext);
     static void routeThunderboltEnumeration(KernelPatcher &patcher, size_t *index, mach_vm_address_t *address, size_t *size);
+    static void applySequoiaPatch(KernelPatcher &patcher, KernelPatcher::KextInfo *kext);
 };
 
 #endif /* kern_patches_hpp */

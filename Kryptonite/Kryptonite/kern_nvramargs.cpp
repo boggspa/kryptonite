@@ -9,6 +9,8 @@
 #include <Headers/kern_iokit.hpp>
 #include <Headers/kern_api.hpp>
 
+bool NVRAMArgs::sequoiaForce = false;
+
 void NVRAMArgs::getGPU() {
     if (!PE_parse_boot_argn(gpuArg, &gpu, sizeof(gpu))) {
         SYSLOG(moduleName, "GPU vendor args not found.");
@@ -24,7 +26,7 @@ void NVRAMArgs::getTBTVersion() {
         return;
     }
     
-    if (tbtVersion < 1 | tbtVersion > 3) {
+    if (tbtVersion < 1 || tbtVersion > 5) {
         SYSLOG(moduleName, "Invalid or unsupported thunderbolt version provided.");
         return;
     }
@@ -32,9 +34,22 @@ void NVRAMArgs::getTBTVersion() {
     SYSLOG(moduleName, "Provided thunderbolt version: %d", tbtVersion);
 }
 
+void NVRAMArgs::getSequoiaForce() {
+    if (!PE_parse_boot_argn(sequoiaForceArg, &sequoiaForce, sizeof(sequoiaForce))) {
+        SYSLOG(moduleName, "%s boot arg not found.", sequoiaForceArg);
+        return;
+    }
+
+    if (sequoiaForce)
+        SYSLOG(moduleName, "%s enabled: %d", sequoiaForceArg, sequoiaForce);
+    else
+        SYSLOG(moduleName, "%s explicitly disabled.", sequoiaForceArg);
+}
+
 void NVRAMArgs::init() {
     getGPU();
     getTBTVersion();
+    getSequoiaForce();
 }
 
 bool NVRAMArgs::isAMD() {
@@ -43,6 +58,16 @@ bool NVRAMArgs::isAMD() {
 
 bool NVRAMArgs::isNVDA() {
     return !strcmp(gpu, nvda);
+}
+
+bool NVRAMArgs::shouldForceSequoia() {
+    return sequoiaForce;
+}
+
+bool NVRAMArgs::skipThunderboltEnum() {
+    bool skip = false;
+    PE_parse_boot_argn("skipthunderboltenum", &skip, sizeof(skip));
+    return skip;
 }
 
 bool NVRAMArgs::isThunderbolt1() {
