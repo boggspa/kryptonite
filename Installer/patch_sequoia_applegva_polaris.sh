@@ -114,7 +114,7 @@ elif [ $PY_EXIT -eq 2 ]; then
 fi
 
 echo "=== Step 3: Resign AppleGVA (ad-hoc) ==="
-codesign --force --sign - "$GVA_BUNDLE"
+codesign --force --sign - "$GVA_BIN"
 echo "Resign complete."
 
 echo "=== Step 4: Inject Global Defaults for Polaris AMD VideoToolbox ==="
@@ -133,6 +133,6 @@ echo "Checking the applied overrides:"
 defaults read "${DEFAULTS_PLIST%.plist}" | grep -E "forceATI|gvaForce"
 
 echo "=== Final Verification ==="
-codesign -dv "$GVA_BUNDLE" 2>&1 | grep -E 'Identifier|Signed Time|TeamIdentifier' || true
+codesign -dv "$GVA_BIN" 2>&1 | grep -E 'Identifier|Signed Time|TeamIdentifier' || true
 
 echo "Done! AppleGVA has been patched for AMD VideoToolbox acceleration."
