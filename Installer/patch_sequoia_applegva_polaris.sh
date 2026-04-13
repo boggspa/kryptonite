@@ -13,10 +13,26 @@ fi
 VOLUME="${1:-/}"
 if [ "$VOLUME" = "/" ]; then
     echo "Targeting active root volume."
-    mount -uw / || echo "Note: 'mount -uw /' failed, continuing anyway."
 else
     echo "Targeting volume: $VOLUME"
 fi
+if ! touch "$VOLUME/.write_test" 2>/dev/null; then
+    echo "Volume $VOLUME is read-only. Attempting to remount via device node..."
+    DEV=$(diskutil info "$VOLUME" | grep "Device Node" | awk '{print $NF}')
+    if [ -n "$DEV" ]; then
+        echo "Found device $DEV. Unmounting..."
+        diskutil unmount force "$VOLUME" || true
+        mkdir -p "$VOLUME"
+        echo "Mounting $DEV to $VOLUME as read-write..."
+        mount -t apfs "$DEV" "$VOLUME" || mount -uw "$VOLUME" || true
+    else
+        mount -uw "$VOLUME" 2>/dev/null || true
+    fi
+else
+    rm "$VOLUME/.write_test" 2>/dev/null || true
+    echo "Volume is already writable."
+fi
+
 
 GVA_BIN="${VOLUME}/System/Library/PrivateFrameworks/AppleGVA.framework/Versions/A/AppleGVA"
 GVA_BUNDLE="${VOLUME}/System/Library/PrivateFrameworks/AppleGVA.framework"
