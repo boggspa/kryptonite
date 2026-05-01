@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083BF023CED1653B96287AB1 /* SystemStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EDCDDDE0DBC491A22EC781 /* SystemStateModel.swift */; };
+		08609C2FB55A83D4B0F824B1 /* Installer in Copy Installer Scripts */ = {isa = PBXBuildFile; fileRef = 6A3545C306755DEB1DAFE4FC /* Installer */; };
+		0A10C99A25E62A5F5DE2FA59 /* BootArgsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4626794D7DFF5B0088763E24 /* BootArgsModel.swift */; };
+		0F0E6E9E52D608CD9D18A563 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE48D91803E373C9BEF3EC /* ContentView.swift */; };
+		11E4A232168BF314F9E05798 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9754BE23A13DAF2CFEBCAEFA /* Cocoa.framework */; };
+		1803BBD268E3CA14183237D0 /* KryptoniteHelper in Copy Helper (LaunchServices) */ = {isa = PBXBuildFile; fileRef = 26A4AFF35F7C290747FC81AB /* KryptoniteHelper */; };
+		5172C2EFACC1751FE97AF1EC /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5ED1A6342515B5A29A65B /* StatusView.swift */; };
+		5B4DD6B45638E371EFFA12D3 /* EFIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2DE8F17964ACC988E9EE0 /* EFIModel.swift */; };
+		641AC5088AC3823456878B23 /* OCLPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8010992B92E201432926C606 /* OCLPView.swift */; };
+		87341B328E94BB7EB23DF1F3 /* EFIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2ACBB7C75AAE735D6E258 /* EFIView.swift */; };
+		9586DB330C967CE4431B6E66 /* HelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683786E05493E63FE342A66F /* HelperProtocol.swift */; };
+		9F3237345E1C7CAE5E0487A5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C99B5AD7CB3E0B2CB63C019 /* main.swift */; };
 		A8095DF526685F690000D34C /* kern_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8095DF326685F690000D34C /* kern_compatibility.cpp */; };
 		A8095DF626685F690000D34C /* kern_compatibility.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A8095DF426685F690000D34C /* kern_compatibility.hpp */; };
 		A810C77C26687AF100CD8FDA /* kern_nvramargs.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A810C77A26687AF100CD8FDA /* kern_nvramargs.hpp */; };
@@ -22,9 +34,81 @@
 		A8BA0202266AB82B000D97CC /* kern_patches.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8BA0200266AB82B000D97CC /* kern_patches.cpp */; };
 		A8BA0203266AB82B000D97CC /* kern_patches.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A8BA0201266AB82B000D97CC /* kern_patches.hpp */; };
 		A8FCD4E02668752100A39213 /* kern_targetkexts.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A8FCD4DF2668752100A39213 /* kern_targetkexts.hpp */; };
+		D0BDF2C507140BEC7274FCF7 /* ViewCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCF502CE3FE906ECAF1F55 /* ViewCompatibility.swift */; };
+		D4A2F189E4637D1491EAB321 /* ScriptRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140B9883940FC6072E76513 /* ScriptRunnerView.swift */; };
+		E0F3786027CD05D581BC4EAB /* HelperManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98994D072984120B3F560FF /* HelperManager.swift */; };
+		E3B6645417BB4FEBC1AA8BAB /* io.egpu.KryptoniteHelper.plist in Copy Helper Plist (LaunchDaemons) */ = {isa = PBXBuildFile; fileRef = 60E7FC3FB264C84850A6B640 /* io.egpu.KryptoniteHelper.plist */; };
+		E826C6674448EBDCF6402531 /* HelperImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40649819F0D6264B264543FB /* HelperImplementation.swift */; };
+		F9DC31BD7F8241486C812C4D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9754BE23A13DAF2CFEBCAEFA /* Cocoa.framework */; };
+		FB7CD9BE9DA169DE75AD3A44 /* KryptoniteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF6DF01194A96782BB9A6C /* KryptoniteApp.swift */; };
+		FD51089961FAE19F859C415D /* BootArgsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA528EBC10A8EC007AC5FB24 /* BootArgsView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DFC54293D66074A5B6CA3949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A85864FF26625AB10038DC5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F05BA041EC97ADD247668B0E;
+			remoteInfo = KryptoniteHelper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F545BF6D418787BECD06B03 /* Copy Helper Plist (LaunchDaemons) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchDaemons;
+			dstSubfolderSpec = 1;
+			files = (
+				E3B6645417BB4FEBC1AA8BAB /* io.egpu.KryptoniteHelper.plist in Copy Helper Plist (LaunchDaemons) */,
+			);
+			name = "Copy Helper Plist (LaunchDaemons)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6E3A23321009E959A49EBB3 /* Copy Helper (LaunchServices) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				1803BBD268E3CA14183237D0 /* KryptoniteHelper in Copy Helper (LaunchServices) */,
+			);
+			name = "Copy Helper (LaunchServices)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB7A51351B63A9306436454A /* Copy Installer Scripts */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Installer;
+			dstSubfolderSpec = 7;
+			files = (
+				08609C2FB55A83D4B0F824B1 /* Installer in Copy Installer Scripts */,
+			);
+			name = "Copy Installer Scripts";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0C99B5AD7CB3E0B2CB63C019 /* main.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = main.swift; path = main.swift; sourceTree = "<group>"; };
+		26A4AFF35F7C290747FC81AB /* KryptoniteHelper */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; path = KryptoniteHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AA5ED1A6342515B5A29A65B /* StatusView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatusView.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		2ED30DBED40C71E499F05BF4 /* KryptoniteHelper.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = KryptoniteHelper.entitlements; path = KryptoniteHelper.entitlements; sourceTree = "<group>"; };
+		40649819F0D6264B264543FB /* HelperImplementation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HelperImplementation.swift; path = HelperImplementation.swift; sourceTree = "<group>"; };
+		4626794D7DFF5B0088763E24 /* BootArgsModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BootArgsModel.swift; path = BootArgsModel.swift; sourceTree = "<group>"; };
+		488452BD6EDEB6F0E9ED6E91 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
+		57B2ACBB7C75AAE735D6E258 /* EFIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EFIView.swift; path = EFIView.swift; sourceTree = "<group>"; };
+		5878A8C4D5BFCE629B21A374 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = .app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60E7FC3FB264C84850A6B640 /* io.egpu.KryptoniteHelper.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = io.egpu.KryptoniteHelper.plist; path = io.egpu.KryptoniteHelper.plist; sourceTree = "<group>"; };
+		683786E05493E63FE342A66F /* HelperProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HelperProtocol.swift; path = HelperProtocol.swift; sourceTree = "<group>"; };
+		6A3545C306755DEB1DAFE4FC /* Installer */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = ../Installer; sourceTree = SOURCE_ROOT; };
+		7DBF6DF01194A96782BB9A6C /* KryptoniteApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KryptoniteApp.swift; path = KryptoniteApp.swift; sourceTree = "<group>"; };
+		8010992B92E201432926C606 /* OCLPView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OCLPView.swift; path = OCLPView.swift; sourceTree = "<group>"; };
+		88DCF502CE3FE906ECAF1F55 /* ViewCompatibility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ViewCompatibility.swift; sourceTree = "<group>"; };
+		8AA29E37846631D23483321F /* KryptoniteApp.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = KryptoniteApp.entitlements; path = KryptoniteApp.entitlements; sourceTree = "<group>"; };
+		93EDCDDDE0DBC491A22EC781 /* SystemStateModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SystemStateModel.swift; path = SystemStateModel.swift; sourceTree = "<group>"; };
+		9754BE23A13DAF2CFEBCAEFA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		A8095DF326685F690000D34C /* kern_compatibility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kern_compatibility.cpp; sourceTree = "<group>"; };
 		A8095DF426685F690000D34C /* kern_compatibility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_compatibility.hpp; sourceTree = "<group>"; };
 		A810C77A26687AF100CD8FDA /* kern_nvramargs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_nvramargs.hpp; sourceTree = "<group>"; };
@@ -78,9 +162,31 @@
 		A8BA0200266AB82B000D97CC /* kern_patches.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kern_patches.cpp; sourceTree = "<group>"; };
 		A8BA0201266AB82B000D97CC /* kern_patches.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_patches.hpp; sourceTree = "<group>"; };
 		A8FCD4DF2668752100A39213 /* kern_targetkexts.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_targetkexts.hpp; sourceTree = "<group>"; };
+		B140B9883940FC6072E76513 /* ScriptRunnerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScriptRunnerView.swift; path = ScriptRunnerView.swift; sourceTree = "<group>"; };
+		B3AE48D91803E373C9BEF3EC /* ContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D98994D072984120B3F560FF /* HelperManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HelperManager.swift; path = HelperManager.swift; sourceTree = "<group>"; };
+		DFA330164CDDA0F00CF00503 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
+		E2B2DE8F17964ACC988E9EE0 /* EFIModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EFIModel.swift; path = EFIModel.swift; sourceTree = "<group>"; };
+		EA528EBC10A8EC007AC5FB24 /* BootArgsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BootArgsView.swift; path = BootArgsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		00E92C3521A8515B0C1B3F92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11E4A232168BF314F9E05798 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80794141810FA60F8BF5483C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC31BD7F8241486C812C4D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A858650526625AB10038DC5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,12 +197,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		208F9754AFC4D37A27999D2A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2AA5ED1A6342515B5A29A65B /* StatusView.swift */,
+				EA528EBC10A8EC007AC5FB24 /* BootArgsView.swift */,
+				57B2ACBB7C75AAE735D6E258 /* EFIView.swift */,
+				B140B9883940FC6072E76513 /* ScriptRunnerView.swift */,
+				8010992B92E201432926C606 /* OCLPView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3DA2F304EAC451765B458E1E /* KryptoniteHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0C99B5AD7CB3E0B2CB63C019 /* main.swift */,
+				40649819F0D6264B264543FB /* HelperImplementation.swift */,
+				DFA330164CDDA0F00CF00503 /* Info.plist */,
+				2ED30DBED40C71E499F05BF4 /* KryptoniteHelper.entitlements */,
+				60E7FC3FB264C84850A6B640 /* io.egpu.KryptoniteHelper.plist */,
+			);
+			path = KryptoniteHelper;
+			sourceTree = "<group>";
+		};
+		6250334038FA6332BC9AF26F /* KryptoniteApp */ = {
+			isa = PBXGroup;
+			children = (
+				7DBF6DF01194A96782BB9A6C /* KryptoniteApp.swift */,
+				B3AE48D91803E373C9BEF3EC /* ContentView.swift */,
+				208F9754AFC4D37A27999D2A /* Views */,
+				A70261BFD39F698109CC4FF2 /* Models */,
+				9DE01015B15001E74CBDB550 /* Shared */,
+				488452BD6EDEB6F0E9ED6E91 /* Info.plist */,
+				8AA29E37846631D23483321F /* KryptoniteApp.entitlements */,
+				D98994D072984120B3F560FF /* HelperManager.swift */,
+				88DCF502CE3FE906ECAF1F55 /* ViewCompatibility.swift */,
+			);
+			path = KryptoniteApp;
+			sourceTree = "<group>";
+		};
+		98C2C7E2D89F8BDFA1BA167A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDD0A781E9942BDC5FB51E98 /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9DE01015B15001E74CBDB550 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				683786E05493E63FE342A66F /* HelperProtocol.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		A70261BFD39F698109CC4FF2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4626794D7DFF5B0088763E24 /* BootArgsModel.swift */,
+				93EDCDDDE0DBC491A22EC781 /* SystemStateModel.swift */,
+				E2B2DE8F17964ACC988E9EE0 /* EFIModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A85864FE26625AB10038DC5B = {
 			isa = PBXGroup;
 			children = (
 				A858654026625D900038DC5B /* SDK */,
 				A858650A26625AB10038DC5B /* Kryptonite */,
 				A858650926625AB10038DC5B /* Products */,
+				98C2C7E2D89F8BDFA1BA167A /* Frameworks */,
+				6250334038FA6332BC9AF26F /* KryptoniteApp */,
+				3DA2F304EAC451765B458E1E /* KryptoniteHelper */,
+				6A3545C306755DEB1DAFE4FC /* Installer */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				A858650826625AB10038DC5B /* Kryptonite.kext */,
+				5878A8C4D5BFCE629B21A374 /* .app */,
+				26A4AFF35F7C290747FC81AB /* KryptoniteHelper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,6 +418,14 @@
 			name = Base;
 			sourceTree = "<group>";
 		};
+		EDD0A781E9942BDC5FB51E98 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				9754BE23A13DAF2CFEBCAEFA /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -260,6 +446,27 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		31809AE5EB4F75B37A643D75 /* KryptoniteApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35F98350468240279F1DAA9F /* Build configuration list for PBXNativeTarget "KryptoniteApp" */;
+			buildPhases = (
+				A5B550975E22AF5FF05E0EBA /* Sources */,
+				80794141810FA60F8BF5483C /* Frameworks */,
+				77328537AF7CE2207B54E936 /* Resources */,
+				DB7A51351B63A9306436454A /* Copy Installer Scripts */,
+				D6E3A23321009E959A49EBB3 /* Copy Helper (LaunchServices) */,
+				9F545BF6D418787BECD06B03 /* Copy Helper Plist (LaunchDaemons) */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D9838782B3EDB31425C2BA1 /* PBXTargetDependency */,
+			);
+			name = KryptoniteApp;
+			productName = KryptoniteApp;
+			productReference = 5878A8C4D5BFCE629B21A374 /* .app */;
+			productType = "com.apple.product-type.application";
+		};
 		A858650726625AB10038DC5B /* Kryptonite */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A858651226625AB10038DC5B /* Build configuration list for PBXNativeTarget "Kryptonite" */;
@@ -277,6 +484,23 @@
 			productName = eGFXEnabler;
 			productReference = A858650826625AB10038DC5B /* Kryptonite.kext */;
 			productType = "com.apple.product-type.kernel-extension";
+		};
+		F05BA041EC97ADD247668B0E /* KryptoniteHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6457CEBACBAC4420B1763100 /* Build configuration list for PBXNativeTarget "KryptoniteHelper" */;
+			buildPhases = (
+				A82674E0DB677E7E332F955C /* Sources */,
+				00E92C3521A8515B0C1B3F92 /* Frameworks */,
+				CB4D3D7504A0E727A8B5AA92 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KryptoniteHelper;
+			productName = KryptoniteHelper;
+			productReference = 26A4AFF35F7C290747FC81AB /* KryptoniteHelper */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -305,12 +529,28 @@
 			projectRoot = "";
 			targets = (
 				A858650726625AB10038DC5B /* Kryptonite */,
+				31809AE5EB4F75B37A643D75 /* KryptoniteApp */,
+				F05BA041EC97ADD247668B0E /* KryptoniteHelper */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		77328537AF7CE2207B54E936 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A858650626625AB10038DC5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB4D3D7504A0E727A8B5AA92 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,6 +560,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5B550975E22AF5FF05E0EBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB7CD9BE9DA169DE75AD3A44 /* KryptoniteApp.swift in Sources */,
+				0F0E6E9E52D608CD9D18A563 /* ContentView.swift in Sources */,
+				5172C2EFACC1751FE97AF1EC /* StatusView.swift in Sources */,
+				FD51089961FAE19F859C415D /* BootArgsView.swift in Sources */,
+				87341B328E94BB7EB23DF1F3 /* EFIView.swift in Sources */,
+				D4A2F189E4637D1491EAB321 /* ScriptRunnerView.swift in Sources */,
+				641AC5088AC3823456878B23 /* OCLPView.swift in Sources */,
+				0A10C99A25E62A5F5DE2FA59 /* BootArgsModel.swift in Sources */,
+				083BF023CED1653B96287AB1 /* SystemStateModel.swift in Sources */,
+				5B4DD6B45638E371EFFA12D3 /* EFIModel.swift in Sources */,
+				9586DB330C967CE4431B6E66 /* HelperProtocol.swift in Sources */,
+				E0F3786027CD05D581BC4EAB /* HelperManager.swift in Sources */,
+				D0BDF2C507140BEC7274FCF7 /* ViewCompatibility.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A82674E0DB677E7E332F955C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F3237345E1C7CAE5E0487A5 /* main.swift in Sources */,
+				E826C6674448EBDCF6402531 /* HelperImplementation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A858650426625AB10038DC5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,7 +606,65 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5D9838782B3EDB31425C2BA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F05BA041EC97ADD247668B0E /* KryptoniteHelper */;
+			targetProxy = DFC54293D66074A5B6CA3949 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		2836D9AAC5C14772B0B64BD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = KryptoniteHelper/KryptoniteHelper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CZML8FK2D;
+				INFOPLIST_FILE = KryptoniteHelper/Info.plist;
+				INSTALL_PATH = /Library/PrivilegedHelperTools;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.egpu.KryptoniteHelper;
+				PRODUCT_MODULE_NAME = KryptoniteHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		61E7CCD4A1CE4D8E9FFADAC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = KryptoniteApp/KryptoniteApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CZML8FK2D;
+				INFOPLIST_FILE = KryptoniteApp/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.egpu.KryptoniteApp;
+				PRODUCT_MODULE_NAME = KryptoniteApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		9E36CDD7C9ED4CC7AC7F3AF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = KryptoniteApp/KryptoniteApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CZML8FK2D;
+				INFOPLIST_FILE = KryptoniteApp/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.egpu.KryptoniteApp;
+				PRODUCT_MODULE_NAME = KryptoniteApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
 		A858651026625AB10038DC5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -456,14 +783,14 @@
 		A858651326625AB10038DC5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = x86_64;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8CZML8FK2D;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MODULE_VERSION=$(MODULE_VERSION)",
 					"PRODUCT_NAME=$(PRODUCT_NAME)",
@@ -510,7 +837,7 @@
 		A858651426625AB10038DC5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = x86_64;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "-";
@@ -518,7 +845,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8CZML8FK2D;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MODULE_VERSION=$(MODULE_VERSION)",
@@ -563,9 +890,45 @@
 			};
 			name = Release;
 		};
+		E901BFF2C2AF407FB34FD98B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = KryptoniteHelper/KryptoniteHelper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CZML8FK2D;
+				INFOPLIST_FILE = KryptoniteHelper/Info.plist;
+				INSTALL_PATH = /Library/PrivilegedHelperTools;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.egpu.KryptoniteHelper;
+				PRODUCT_MODULE_NAME = KryptoniteHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		35F98350468240279F1DAA9F /* Build configuration list for PBXNativeTarget "KryptoniteApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E36CDD7C9ED4CC7AC7F3AF2 /* Debug */,
+				61E7CCD4A1CE4D8E9FFADAC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6457CEBACBAC4420B1763100 /* Build configuration list for PBXNativeTarget "KryptoniteHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E901BFF2C2AF407FB34FD98B /* Debug */,
+				2836D9AAC5C14772B0B64BD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A858650226625AB10038DC5B /* Build configuration list for PBXProject "Kryptonite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

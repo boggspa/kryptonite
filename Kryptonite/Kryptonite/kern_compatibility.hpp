@@ -21,6 +21,7 @@ private:
 public:
     static bool isUnsupported();
     static bool isOlderKernel();
+    static bool isSequoiaForced();
 };
 
 #endif /* kern_compatibility_hpp */

@@ -16,11 +16,11 @@ public:
     constexpr static const char* moduleName = "patchset";
     
     void init();
-    
+
 private:
     mach_vm_address_t orgSkipEnumerationCallback {0};
     
-    void processKext(KernelPatcher& patcher, size_t index, mach_vm_address_t address, size_t size);
+    void processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t address, size_t size);
 };
 
 #endif /* kern_patchset */

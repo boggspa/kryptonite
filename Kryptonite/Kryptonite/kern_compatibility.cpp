@@ -6,11 +6,12 @@
 //
 
 #include "kern_compatibility.hpp"
+#include "kern_nvramargs.hpp"
 
 bool Compatibility::isUnsupported() {
     SYSLOG(moduleName, "Kernel: %d.%d", version_major, version_minor);
     
-    bool c = (version_major < minVersion) | (version_major == minVersion & version_minor < minMinorVersion);
+    bool c = (version_major < minVersion) || (version_major == minVersion && version_minor < minMinorVersion);
     
     SYSLOG(moduleName, "System supported: %d", !c);
     
@@ -18,9 +19,17 @@ bool Compatibility::isUnsupported() {
 }
 
 bool Compatibility::isOlderKernel() {
-    bool c = (version_major < oldVersion) | (version_major == oldVersion & version_minor < oldMinorVersion);
+    bool c = (version_major < oldVersion) || (version_major == oldVersion && version_minor < oldMinorVersion);
     
     SYSLOG(moduleName, "Is older kernel: %d", c);
     
+    return c;
+}
+
+bool Compatibility::isSequoiaForced() {
+    bool c = NVRAMArgs::shouldForceSequoia();
+
+    SYSLOG(moduleName, "Is Sequoia forced: %d", c);
+
     return c;
 }

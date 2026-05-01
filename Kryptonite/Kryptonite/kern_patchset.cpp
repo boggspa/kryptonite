@@ -31,11 +31,44 @@ void PatchSet::processKext(KernelPatcher& patcher, size_t index, mach_vm_address
         if (!strcmp(kextList[i].id, kextList[0].id)) {
             Patches::unblockLegacyThunderbolt(patcher, &kextList[i]);
             Patches::bypassPCITunnelled(patcher, &kextList[i]);
+            Patches::applySequoiaPatch(patcher, &kextList[i]);
         }
         
         if (!strcmp(kextList[i].id, kextList[1].id)) {
             Patches::bypassPCITunnelled(patcher, &kextList[i]);
         }
+
+        if (!strcmp(kextList[i].id, kextList[9].id)) {
+            Patches::relaxGraphicsDevicePolicy(patcher, &kextList[i]);
+        }
+
+        if (!strcmp(kextList[i].id, kextList[10].id)) {
+            Patches::disableIntelFramebufferAGDC(patcher, index, address, size);
+            Patches::forceIntelFramebufferOnlineDisplays(patcher, index, address, size);
+        }
+
+        if (!strcmp(kextList[i].id, kextList[11].id)) {
+            Patches::skipAMDVRAMTest(patcher, index, address, size);
+            Patches::validateAMDDetailedTiming(patcher, index, address, size);
+        }
+
+        if (!strcmp(kextList[i].id, kextList[5].id)) {
+            // AMD path: bypass IOPCITunnelled gate in AMDRadeonX4000 on newer systems.
+            Patches::bypassPCITunnelled(patcher, &kextList[i]);
+            Patches::stabiliseAMDAccelConfig(patcher, index, address, size);
+            Patches::guardAMDIOSurfacePlaneInfo(patcher, &kextList[i]);
+            // Patches::relaxAMDSharedUserClientOutputSizing(patcher, index, address, size);
+        }
+
+        if (!strcmp(kextList[i].id, kextList[7].id)) {
+            Patches::bypassAMDProjectSelection(patcher, index, address, size);
+        }
+
+        if (!strcmp(kextList[i].id, kextList[8].id)) {
+            Patches::relaxAMDFramebufferTimingValidation(patcher, index, address, size);
+            Patches::forceAMD24BitOutput(patcher, index, address, size, &kextList[i]);
+        }
+
         
         if (!strcmp(kextList[i].id, kextList[2].id)) {
             Patches::updateMuxControlNVRAMVar(patcher, &kextList[i]);
@@ -52,4 +85,3 @@ void PatchSet::processKext(KernelPatcher& patcher, size_t index, mach_vm_address
     
     patcher.clearError();
 }
-

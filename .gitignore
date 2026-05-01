@@ -1,6 +1,4 @@
 *.DS_Store
-Lilu.kext
-MacKernelSDK
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -27,3 +25,36 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+## Generated release/build artifacts
+BuildArtifacts/
+Installer/dist/
+*.kext/
+*.dSYM/
+*.xcarchive/
+*.a
+*.o
+*.dylib
+*.so
+*.zip
+*.dmg
+*.pkg
+*.tar
+*.tar.gz
+*.tgz
+
+## Local payloads, probes, and diagnostics
+oclp-universal/
+OCLP-Payloads/
+Universal-Binaries/
+RootPatchBackups/
+probe/
+probes/
+*.log
+*.crash
+*.panic
+*.ips
+*.spindump
+*.trace
+*.diag
+*.ioreg

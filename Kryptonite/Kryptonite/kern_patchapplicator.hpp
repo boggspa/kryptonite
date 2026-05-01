@@ -16,8 +16,8 @@ private:
     constexpr static const char* moduleName = "patchapp";
     
 public:
-    void applyLookupPatch(KernelPatcher& patcher, KernelPatcher::LookupPatch* patch);
-    void applyRoutingPatch(size_t index, KernelPatcher &patcher, KernelPatcher::RouteRequest *patch, mach_vm_address_t address, size_t size);
+    void applyLookupPatch(KernelPatcher& patcher, KernelPatcher::LookupPatch* patch, const char *patchName);
+    void applyRoutingPatch(size_t index, KernelPatcher &patcher, KernelPatcher::RouteRequest *patch, mach_vm_address_t address, size_t size, const char *patchName);
 };
 
 #endif /* kern_patchapplicator_hpp */
