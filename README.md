@@ -22,9 +22,7 @@ The upstream project enables external GPUs on Thunderbolt 1 and 2 Macs. This for
 
 ## What Is Not Included
 
-This repository does not redistribute OCLP Universal Binaries, Apple GPU drivers, Apple system frameworks, patched system files, local probe bundles, compiled kexts, or release ZIPs.
-
-OCLP Universal Binaries images may use the public password `password`; that is an OCLP distribution convention, not a project secret. Even so, those binaries remain external user-provided inputs and are not bundled here.
+This repository does not redistribute OCLP Universal Binaries, Apple GPU drivers, Apple system frameworks, patched system files, local probe bundles, compiled kexts, prebuilt static libraries, or release ZIPs.
 
 ## Known Limitations
 

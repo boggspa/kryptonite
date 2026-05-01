@@ -32,6 +32,10 @@ Installer/dist/
 *.kext/
 *.dSYM/
 *.xcarchive/
+*.a
+*.o
+*.dylib
+*.so
 *.zip
 *.dmg
 *.pkg
