@@ -1,0 +1,107 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+usage: prepare_sequoia_polaris_modern_bronze_amfi_validation.sh <mounted-system-volume> <efi-config-plist> [oclp-payload-root]
+
+Prepare a single validation boot for the modern 13.5.2 Bronze Metal bundle
+with the Ivy Bridge BMI hotfixes applied and Library Validation temporarily
+relaxed.
+
+This wrapper:
+  1. reapplies the modern Bronze-only BMI hotfix overlay
+  2. adds amfi_get_out_of_my_way=0x1 to OpenCore boot-args
+
+Defaults:
+  oclp-payload-root  /tmp/oclp-universal/13.5.2
+
+Run this from a stable helper OS such as Big Sur, against an offline Sequoia
+system volume and the EFI config.plist used to boot that Sequoia install.
+EOF
+}
+
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ] || [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+  usage
+  exit 0
+fi
+
+TARGET="${1%/}"
+CFG="$2"
+PAYLOAD_ROOT="${3:-/tmp/oclp-universal/13.5.2}"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BRONZE_SCRIPT="${SCRIPT_DIR}/apply_sequoia_polaris_modern_bronze_bmi_hotfix_overlay.sh"
+GUID="7C436110-AB2A-4BBB-A880-FE41995C9F82"
+BOOTARGS_KEY=":NVRAM:Add:${GUID}:boot-args"
+CSR_KEY=":NVRAM:Add:${GUID}:csr-active-config"
+AMFI_ARG="amfi_get_out_of_my_way=0x1"
+
+[ -d "$TARGET" ] || { echo "missing target root: $TARGET" >&2; exit 1; }
+[ -f "$CFG" ] || { echo "missing config.plist: $CFG" >&2; exit 1; }
+[ -f "$BRONZE_SCRIPT" ] || { echo "missing Bronze overlay script: $BRONZE_SCRIPT" >&2; exit 1; }
+
+current_bootargs="$(
+  /usr/libexec/PlistBuddy -c "Print ${BOOTARGS_KEY}" "$CFG" 2>/dev/null || true
+)"
+current_csr_hex="$(
+  /usr/libexec/PlistBuddy -c "Print ${CSR_KEY}" "$CFG" 2>/dev/null \
+    | /usr/bin/perl -ne 'if (/([0-9A-Fa-f]{8})/) { print lc $1; exit 0 }' || true
+)"
+current_csr_value="$(
+  /usr/bin/perl -e '
+    my $hex = shift // "";
+    if ($hex =~ /^[0-9a-fA-F]{8}$/) {
+      my $value = unpack("V", pack("H*", $hex));
+      printf "0x%X", $value;
+    }
+  ' "$current_csr_hex"
+)"
+
+echo "Preparing Sequoia modern Bronze AMFI validation boot..."
+echo "  target:  $TARGET"
+echo "  config:  $CFG"
+echo "  payload: $PAYLOAD_ROOT"
+echo
+echo "Current EFI boot-args:"
+echo "  ${current_bootargs:-"(missing)"}"
+echo "Current EFI csr-active-config bytes:"
+echo "  ${current_csr_hex:-"(missing)"}${current_csr_value:+ (${current_csr_value})}"
+echo
+
+if [ -n "$current_csr_hex" ] && ! /usr/bin/perl -e '
+  my $hex = shift // "";
+  exit 1 unless $hex =~ /^[0-9a-fA-F]{8}$/;
+  my $value = unpack("V", pack("H*", $hex));
+  my $has_lv_exception = (($value & 0x1) != 0) ? 1 : 0;
+  exit($has_lv_exception ? 0 : 1);
+' "$current_csr_hex"; then
+  echo "Warning: csr-active-config does not include SIP bit 0x1."
+  echo "         The Library Validation test may still fail even with ${AMFI_ARG}."
+  echo
+fi
+
+zsh "$BRONZE_SCRIPT" "$TARGET" "$PAYLOAD_ROOT"
+
+echo
+echo "Enabling temporary AMFI boot-arg for this validation pass..."
+updated_bootargs=""
+for token in ${=current_bootargs}; do
+  token_name="${token%%=*}"
+  if [ "$token_name" = "${AMFI_ARG%%=*}" ]; then
+    continue
+  fi
+  updated_bootargs="${updated_bootargs} ${token}"
+done
+updated_bootargs="${updated_bootargs} ${AMFI_ARG}"
+updated_bootargs="$(printf '%s\n' "$updated_bootargs" | awk '{$1=$1; print}')"
+
+cp "$CFG" "$CFG.backup-$(date +%Y%m%d-%H%M%S)-bootargs"
+/usr/libexec/PlistBuddy -c "Delete ${BOOTARGS_KEY}" "$CFG" >/dev/null 2>&1 || true
+/usr/libexec/PlistBuddy -c "Add ${BOOTARGS_KEY} string ${updated_bootargs}" "$CFG"
+/usr/libexec/PlistBuddy -c "Print ${BOOTARGS_KEY}" "$CFG"
+
+echo
+echo "Validation boot prepared."
+echo "Rollback boot-arg when finished:"
+echo "  zsh ${SCRIPT_DIR}/disable_efi_amfi_lv_validation.sh \"$CFG\""

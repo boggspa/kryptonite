@@ -25,3 +25,32 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+## Generated release/build artifacts
+BuildArtifacts/
+Installer/dist/
+*.kext/
+*.dSYM/
+*.xcarchive/
+*.zip
+*.dmg
+*.pkg
+*.tar
+*.tar.gz
+*.tgz
+
+## Local payloads, probes, and diagnostics
+oclp-universal/
+OCLP-Payloads/
+Universal-Binaries/
+RootPatchBackups/
+probe/
+probes/
+*.log
+*.crash
+*.panic
+*.ips
+*.spindump
+*.trace
+*.diag
+*.ioreg

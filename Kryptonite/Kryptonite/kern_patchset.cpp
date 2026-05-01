@@ -56,6 +56,7 @@ void PatchSet::processKext(KernelPatcher& patcher, size_t index, mach_vm_address
             // AMD path: bypass IOPCITunnelled gate in AMDRadeonX4000 on newer systems.
             Patches::bypassPCITunnelled(patcher, &kextList[i]);
             Patches::stabiliseAMDAccelConfig(patcher, index, address, size);
+            Patches::guardAMDIOSurfacePlaneInfo(patcher, &kextList[i]);
             // Patches::relaxAMDSharedUserClientOutputSizing(patcher, index, address, size);
         }
 

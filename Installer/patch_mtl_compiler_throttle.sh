@@ -11,10 +11,18 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 VOLUME="${1:-/}"
+PB="/usr/libexec/PlistBuddy"
+SYSVER_PLIST="${VOLUME}/System/Library/CoreServices/SystemVersion.plist"
+TARGET_FS_TYPE="$(diskutil info "$VOLUME" 2>/dev/null | awk -F': *' '/File System Personality/ {print tolower($2); exit}')"
+PLIST_ONLY_MODE="${KRY_MTL_PLIST_ONLY:-0}"
 if [ "$VOLUME" = "/" ]; then
     echo "Targeting active root volume."
 else
     echo "Targeting volume: $VOLUME"
+fi
+if [ "$VOLUME" != "/" ] && [ "${TARGET_FS_TYPE:-}" != "apfs" ] && [ "${KRY_FORCE_MTL_THROTTLE:-0}" != "1" ]; then
+    echo "Refusing to patch non-APFS target $VOLUME (detected ${TARGET_FS_TYPE:-unknown}). Mount the Sequoia system volume locally from a helper OS, or set KRY_FORCE_MTL_THROTTLE=1 to override."
+    exit 1
 fi
 if ! touch "$VOLUME/.write_test" 2>/dev/null; then
     echo "Volume $VOLUME is read-only. Attempting to remount via device node..."
@@ -33,7 +41,6 @@ else
     echo "Volume is already writable."
 fi
 
-
 export MTL_XPC="${VOLUME}/System/Library/Frameworks/Metal.framework/Versions/A/XPCServices/MTLCompilerService.xpc/Contents/Info.plist"
 export MTL_XPC_BUNDLE="${VOLUME}/System/Library/Frameworks/Metal.framework/Versions/A/XPCServices/MTLCompilerService.xpc"
 export MTL_BIN="${VOLUME}/System/Library/Frameworks/Metal.framework/Versions/A/Metal"
@@ -50,6 +57,33 @@ if [ ! -f "$MTL_BIN" ]; then
     exit 1
 fi
 
+if python3 -c "
+import sys
+import os
+
+path = os.environ.get('MTL_BIN', '')
+if not path:
+    sys.exit(1)
+
+patch_bytes = bytes([0xB8, 0x02, 0x00, 0x00, 0x00, 0xC3, 0x90, 0x90])
+targets = (0x2060, 0x2070, 0x2080)
+
+try:
+    with open(path, 'rb') as f:
+        data = f.read()
+except Exception:
+    sys.exit(1)
+
+sys.exit(0 if all(data[offset:offset + 8] == patch_bytes for offset in targets) else 1)
+"; then
+    if [ "$PLIST_ONLY_MODE" = "1" ]; then
+        echo "Metal binary is already throttled. Plist-only mode requires a clean Metal payload; restore the original Metal files first."
+    else
+        echo "Refusing to create a fresh metal_patch_backup_* from an already-throttled Metal binary. Reuse an older clean backup or restore the original Metal payload first."
+    fi
+    exit 1
+fi
+
 echo "=== Step 1: Backup ==="
 mkdir -p "$BACKUP_DIR"
 cp "$MTL_XPC" "$BACKUP_DIR/MTLCompilerService_Info.plist.orig"
@@ -61,8 +95,11 @@ plutil -replace XPCService._MultipleInstances -bool false "$MTL_XPC"
 echo "XPC plist patched."
 plutil -p "$MTL_XPC" | grep -A2 XPCService
 
-echo "=== Step 3: Binary patch Metal framework - cap compiler count to 2 ==="
-python3 -c "
+if [ "$PLIST_ONLY_MODE" = "1" ]; then
+    echo "=== Step 3: Skipping Metal.framework binary patch (plist-only mode) ==="
+else
+    echo "=== Step 3: Binary patch Metal framework - cap compiler count to 2 ==="
+    python3 -c "
 import sys
 import os
 
@@ -109,10 +146,13 @@ else
     echo "Binary patch failed."
     exit 1
 fi
+fi
 
-echo "=== Step 4: Resign XPC bundle & Metal framework (ad-hoc) ==="
+echo "=== Step 4: Resign modified payload (ad-hoc) ==="
 codesign --force --sign - "$MTL_XPC_BUNDLE"
-codesign --force --sign - "$MTL_BIN"
+if [ "$PLIST_ONLY_MODE" != "1" ]; then
+    codesign --force --sign - "$MTL_BIN"
+fi
 echo "Resign complete."
 
 echo "=== Final Verification ==="
